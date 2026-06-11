@@ -9,7 +9,7 @@ int collided(int x, int y);
 bool endValue(int x, int y);
 class Sprite
 {
-	friend int collided(int x, int y);
+	friend int collided(int x, int y);  
 	friend bool endValue(int x, int y);
 public:
 	Sprite();
