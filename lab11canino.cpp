@@ -8,6 +8,8 @@ using namespace std;
 
 int collided(int x, int y);  //Tile Collision
 bool endValue(int x, int y); //End Block with the User Value = 8
+bool gameOver = false;
+double gameOverTime = 0.0;
 int main(void)
 {
 	const int WIDTH = 900;
@@ -70,18 +72,32 @@ int main(void)
 		if (ev.type == ALLEGRO_EVENT_TIMER)
 		{
 			render = true;
-			if (keys[UP])
-				;
-			else if (keys[DOWN])
-				;
-			else if (keys[LEFT])
-				player.UpdateSprites(WIDTH, HEIGHT, 0);
-			else if (keys[RIGHT])
-				player.UpdateSprites(WIDTH, HEIGHT, 1);
-			else
-				player.UpdateSprites(WIDTH, HEIGHT, 2);
-			if (player.CollisionEndBlock())
-				cout << "Hit an End Block\n";
+			if (!gameOver)
+			{
+				if (keys[UP])
+					;
+				else if (keys[DOWN])
+					;
+				else if (keys[LEFT])
+					player.UpdateSprites(WIDTH, HEIGHT, 0);
+				else if (keys[RIGHT])
+					player.UpdateSprites(WIDTH, HEIGHT, 1);
+				else
+					player.UpdateSprites(WIDTH, HEIGHT, 2);
+			}
+			if (!gameOver && player.CollisionEndBlock())
+			{
+				cout << "GAME OVER\n";
+				gameOver = true;
+				gameOverTime = al_get_time();
+			}
+			if (gameOver)
+			{
+				if (al_get_time() - gameOverTime >= 5.0)
+				{
+					done = true;
+				}
+			}
 			render = true;
 
 		}
@@ -89,7 +105,7 @@ int main(void)
 		{
 			done = true;
 		}
-		else if (ev.type == ALLEGRO_EVENT_KEY_DOWN)
+		else if (ev.type == ALLEGRO_EVENT_KEY_DOWN && !gameOver)
 		{
 			switch (ev.keyboard.keycode)
 			{
@@ -114,7 +130,7 @@ int main(void)
 
 			}
 		}
-		else if (ev.type == ALLEGRO_EVENT_KEY_UP)
+		else if (ev.type == ALLEGRO_EVENT_KEY_UP && !gameOver)
 		{
 			switch (ev.keyboard.keycode)
 			{
