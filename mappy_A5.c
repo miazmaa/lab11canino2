@@ -1742,7 +1742,7 @@ b=(colour & 0x001f)
 	*b = (colour & 0x001f);
 }
 static int C15toi(ALLEGRO_COLOR colour)
-{
+{ 
 	return ((int)colour.r << 10) + ((int)colour.g << 5) + (int)colour.b;
 }
 static int C16toi(ALLEGRO_COLOR colour)
