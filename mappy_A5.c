@@ -1737,7 +1737,7 @@ r=(colour & 0xf800) >> 11
 g=(colour & 0x03e0) >> 5
 b=(colour & 0x001f)
 */
-	*r = (colour & 0xf800) >> 11;
+	*r = (colour & 0xf800) >> 11; 
 	*g = (colour & 0x03e0) >> 5;
 	*b = (colour & 0x001f);
 }
